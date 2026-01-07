@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Staff Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Staff Dashboard</h2>
+
+    {% for c in complaints %}
+        <p>
+            <strong>{{ c.title }}</strong><br>
+            {{ c.description }}<br>
+            Status: {{ c.status }}<br><br>
+            <a href="/staff/update/{{ c.id }}/">Update Status</a>
+        </p>
+        <hr>
+    {% empty %}
+        <p>No pending complaints.</p>
+    {% endfor %}
+
+    <a href="/logout/">Logout</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Complaints</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<h2>My Complaints</h2>
+
+{% for c in complaints %}
+    <p>
+        <strong>{{ c.title }}</strong><br>
+        {{ c.description }}<br>
+        Status: {{ c.status }}<br>
+        Assigned Staff: {{ c.assigned_staff.username }}
+    </p>
+    <hr>
+{% empty %}
+    <p>No complaints yet.</p>
+{% endfor %}
+
+<a href="/dashboard/">Back to Dashboard</a>
+
+</body>
+</html>

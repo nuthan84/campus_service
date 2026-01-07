@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Complaint Status</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Update Status</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <select name="status" required>
+            <option value="IN_PROGRESS">In Progress</option>
+            <option value="RESOLVED">Resolved</option>
+        </select><br><br>
+
+        <button type="submit">Update</button>
+    </form>
+
+    <a href="/staff/dashboard/">Back</a>
+</div>
+
+</body>
+</html>

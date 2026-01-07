@@ -1,0 +1,18 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<div class="container">
+<h2>Admin Analytics</h2>
+
+<p>Total Pending: {{ total_pending }}</p>
+<p>Total Resolved: {{ total_resolved }}</p>
+
+<h3>Staff Workload</h3>
+<ul>
+{% for s in staff_stats %}
+    <li>{{ s.staff }} → Pending: {{ s.pending }}</li>
+{% endfor %}
+</ul>
+
+<a href="/admin/">Open Admin Panel</a>
+</div>
