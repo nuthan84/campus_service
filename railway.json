@@ -1,0 +1,10 @@
+{
+  "build": {
+    "builder": "NIXPACKS"
+  },
+  "deploy": {
+    "startCommand": "gunicorn campus_service.wsgi",
+    "healthcheckPath": "/",
+    "healthcheckTimeout": 1000
+  }
+}
