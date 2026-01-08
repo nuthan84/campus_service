@@ -57,11 +57,15 @@ WSGI_APPLICATION = 'campus_service.wsgi.application'
 
 # DATABASE CONFIG FOR RAILWAY
 DATABASES = {
-    "default": dj_database_url.config(
-        default=os.environ["DATABASE_URL"],
-        conn_max_age=600,
-        ssl_require=False
-    )
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": os.environ.get("MYSQLDATABASE"),
+        "USER": os.environ.get("MYSQLUSER"),
+        "PASSWORD": os.environ.get("MYSQLPASSWORD"),
+        "HOST": os.environ.get("MYSQLHOST"),
+        "PORT": os.environ.get("MYSQLPORT"),
+        "OPTIONS": {"charset": "utf8mb4"},
+    }
 }
 
 # FORCE DJANGO TO USE PyMySQL ENGINE
