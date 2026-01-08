@@ -58,11 +58,12 @@ WSGI_APPLICATION = 'campus_service.wsgi.application'
 # DATABASE CONFIG FOR RAILWAY
 DATABASES = {
     "default": dj_database_url.config(
-        default=os.environ.get("DATABASE_URL"),
+        default=os.environ["DATABASE_URL"],
         conn_max_age=600,
         ssl_require=False
     )
 }
+
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
