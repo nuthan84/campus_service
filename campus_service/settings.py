@@ -10,11 +10,10 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-key")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ["*",]  # Railway handles domains automatically
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -23,11 +22,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'users.apps.UsersConfig',   # << ADD THIS
+    'users.apps.UsersConfig',   # Ensure UsersConfig exists
     'complaints',
     'staff',
 ]
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -48,7 +46,7 @@ ROOT_URLCONF = 'campus_service.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'templates'],  # custom templates folder
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -63,10 +61,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'campus_service.wsgi.application'
 
 
-# Database — Railway uses DATABASE_URL
+# -----------------------------
+# DATABASE CONFIGURATION
+# -----------------------------
+# Uses DATABASE_URL on Railway (MySQL)
 DATABASES = {
     "default": dj_database_url.config(
-        default=os.environ.get("DATABASE_URL"),
+        default=os.environ.get("DATABASE_URL"),  # Railway injects this
         conn_max_age=600,
         ssl_require=False
     )
@@ -75,33 +76,33 @@ DATABASES = {
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
 
 # Internationalization
-
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
 
-# Static files for Railway
+# -----------------------------
+# STATIC FILES (Deployment)
+# -----------------------------
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
+
+# Local development
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+# Railway production
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
